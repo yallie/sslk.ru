@@ -1,0 +1,34 @@
+﻿<html>
+<head>
+	<!-- Written by yallie@yandex.ru --> 
+	<title>CrazyBook playlist</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"
+	 integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="
+	 crossorigin="anonymous"></script>
+	<script src="https://w.soundcloud.com/player/api.js"></script>
+	<script>
+		var widget = null;
+		var song_indexes = new Array();
+		var current_index = 0;
+
+		$(function() {
+		    widget = SC.Widget("crazybook_player");
+		    widget.bind(SC.Widget.Events.READY, function() {
+		        widget.unbind(SC.Widget.Events.FINISH);
+		        widget.bind(SC.Widget.Events.FINISH, function() {        
+		            widget.pause();
+		        });
+		
+		        widget.getSounds(function(sounds) {
+					var maxTracks = sounds.length;
+					var skip = Math.floor((Math.random() * maxTracks));
+					widget.skip(skip);
+		        });               
+		    });
+		});
+	</script>
+</head>
+<body style="margin: 0">
+	<iframe id="crazybook_player"width="100%" height="100%" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/259821773%3Fsecret_token%3Ds-178vL&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+</body>
+</html>
